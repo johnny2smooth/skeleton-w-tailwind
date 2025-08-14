@@ -5,18 +5,20 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="w-64" style="view-transition-name: photo-{{product.title | handleize }}">
+<div class="w-64">
   {% for image in product.images %}
     {% if forloop.first %}
-      <h2>{{ product.vendor }}</h2>
+      <div style="view-transition-name: photo-{{product.title | handleize }}">
+        {% render 'image', class: 'product-image w-36', image: image %}    
+      </div>
     {% else %}
+      {% render 'image', class: 'product-image w-36', image: image %}
     {% endif %}
-    {% render 'image', class: 'product-image w-36', image: image %}
   {% endfor %}
 </div>
 
 <div class="product-info">
-  <h1 class="">{{ product.title }}</h1>
+  <h1 class="" style="view-transition-name: title-{{product.title | handleize }}">{{ product.title }}</h1>
   <p class="">{{ product.price | money }}</p>
   <p>{{ product.description }}</p>
 </div>
