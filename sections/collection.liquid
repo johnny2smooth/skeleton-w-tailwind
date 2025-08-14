@@ -15,14 +15,17 @@
     <div class="collection-products">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
-          <div class="collection-product">
+          <div class="collection-product" >
             {% if product.featured_image %}
+              {% assign vt_handle = product.title | handleize %}
+              {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
               {% render 'image',
                 class: 'collection-product__image',
+                style:  vt,
                 image: product.featured_image,
                 url: product.url,
                 width: auto,
-                height: 1000,
+                height: 400,
                 crop: 'center'
               %}
             {% endif %}
