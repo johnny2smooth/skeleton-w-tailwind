@@ -1,0 +1,14 @@
+/* Tailwind v4 single import */
+@import "tailwindcss";
+
+/* IMPORTANT: point Tailwind at your Shopify files so utilities get generated */
+@source "./layout/**/*.{liquid,json}",
+        "./templates/**/*.{liquid,json}",
+        "./sections/**/*.{liquid,json}",
+        "./snippets/**/*.{liquid,json}",
+        "./assets/**/*.{js,css}";
+
+/* (Optional) place custom layers below */
+@layer components {
+  /* .btn { @apply px-3 py-2 rounded; } */
+}
