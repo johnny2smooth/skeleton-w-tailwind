@@ -5,7 +5,7 @@
 <div class="welcome full-width">
   <div class="welcome-content">
     <div>
-      <h1 class="text-4xl">Hello, my sweets!</h1>
+      <h1 class="text-4xl">Hello, my tweets!</h1>
 
       <p class="welcome-description">
         The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started.
@@ -21,6 +21,9 @@
       <img src="{{ 'shoppy-x-ray.svg' | asset_url }}" width="300" height="300">
     </div>
   </div>
+  {% for product in collections['all'] %}
+    <p>hola!</p>
+  {%endfor %}
 </div>
 
 <div class="highlights">
