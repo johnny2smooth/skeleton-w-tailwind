@@ -7,13 +7,17 @@
 
 <div class="w-64" style="view-transition-name: photo-{{product.title | handleize }}">
   {% for image in product.images %}
+    {% if forloop.first %}
+      <p>hola!</p>
+    {% else %}
+    {% endif %}
     {% render 'image', class: 'product-image w-36', image: image %}
   {% endfor %}
 </div>
 
 <div class="product-info">
-  <h1 class="text-red-300">{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
+  <h1 class="">{{ product.title }}</h1>
+  <p class="">{{ product.price | money }}</p>
   <p>{{ product.description }}</p>
 </div>
 

@@ -12,7 +12,7 @@
     </ul>
   </div>
   <div class="grow">
-    <div class="collection-products">
+    <div class="collection-products gap-2">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
           <div class="collection-product" >
@@ -25,7 +25,7 @@
                 image: product.featured_image,
                 url: product.url,
                 width: auto,
-                height: 400,
+                height: 450,
                 crop: 'center'
               %}
             {% endif %}
