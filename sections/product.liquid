@@ -5,13 +5,13 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="w-64" style="view-transition-name: photo-{{product.title | handleize }}">
+<div class="w-64" >
   {% for image in product.images %}
     {% if forloop.first %}
-      <p>hola!</p>
+      {% render 'image', class: 'product-image w-36', image: image, style: "view-transition-name: photo-{{product.title | handleize }}" %}
     {% else %}
+      {% render 'image', class: 'product-image w-36', image: image %}
     {% endif %}
-    {% render 'image', class: 'product-image w-36', image: image %}
   {% endfor %}
 </div>
 
