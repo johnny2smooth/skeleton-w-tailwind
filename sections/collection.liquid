@@ -15,7 +15,7 @@
     <div class="collection-products gap-2">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
-          <div class="collection-product" >
+          <div class="collection-product">
             {% if product.featured_image %}
               {% assign vt_handle = product.title | handleize %}
               {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
@@ -35,7 +35,6 @@
             </div>
           </div>
         {% endfor %}
-
         {{ paginate | default_pagination }}
       {% endpaginate %}
     </div>
@@ -45,7 +44,7 @@
 <h1>{{ collection.title }}</h1>
 
 <div class="collection-products">
-  
+
 </div>
 
 {% stylesheet %}
