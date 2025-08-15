@@ -29,10 +29,10 @@
                 crop: 'center'
               %}
             {% endif %}
-            <div class="collection-product__content" style="view-transition-name: title-{{product.title | handleize }}">
+            <div class="collection-product__content" >
               <a href={{product.url}}> 
-                <p ">{{ product.title }}</p>
-                <p class="font-mono" style="view-transition-name: price-{{product.title | handleize }}">{{ product.price | money }}</p>
+                <p>{{ product.title }}</p>
+                <p class="font-mono">{{ product.price | money }}</p>
               </a>
             </div>
           </div>
