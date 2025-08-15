@@ -8,11 +8,11 @@
 <div class="flex">
   <div class="w-36">
     <ul>
-      <li>sidebar</li>
+      <li class="text-red-300">sidebar</li>
     </ul>
   </div>
   <div class="grow">
-    <div class="collection-products gap-2 text-red-100">
+    <div class="collection-products gap-2">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
           <div class="collection-product">
