@@ -30,8 +30,10 @@
               %}
             {% endif %}
             <div class="collection-product__content">
-              <p class="font-mono text-xs">{{ product.title | escape | link_to: product.url }}</p>
+              <a href={{product.url}} > 
+              <p class="font-mono text-xs" style="view-transition-name: title-{{product.title | handleize }}">{{ product.title }}</p>
               <p>{{ product.price | money }}</p>
+              </a>
             </div>
           </div>
         {% endfor %}
