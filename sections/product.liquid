@@ -17,8 +17,8 @@
   {% endfor %}
 </div>
 
-<div class="product-info">
-  <p class="font-mono" style="view-transition-name: title-{{product.title | handleize }}">{{ product.title }}</p>
+<div class="product-info" style="view-transition-name: title-{{product.title | handleize }}">
+  <p class="font-mono">{{ product.title }}</p>
   <p class="">{{ product.price | money }}</p>
   <p>{{ product.description }}</p>
 </div>
