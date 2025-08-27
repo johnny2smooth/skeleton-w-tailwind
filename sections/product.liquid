@@ -5,44 +5,30 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="w-64" style="view-transition-name: photo-{{product.title | handleize }}">
-  {% for image in product.images %}
-    {% if forloop.first %}
-      <p>hola!</p>
-    {% else %}
-    {% endif %}
-    {% render 'image', class: 'product-image w-36', image: image %}
-  {% endfor %}
-</div>
-
-<div class="product-info">
-  <h1 class="">{{ product.title }}</h1>
-  <p class="">{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
-
-    <input type="text" name="quantity" min="1" value="1">
-
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
+<div class="flex gap-8">
+  {% render 'sidebar' %}
+  {% render 'product-info' %}
+  <div id="photos" style="width: 35%;">
+    {% for image in product.images %}
+      {% if forloop.first %}
+        <div style="view-transition-name: photo-{{product.title | handleize }};">
+          {% render 'image', 
+            class: 'product-image', 
+            image: image,
+            width: 700
+          %}    
+        </div>
+      {% else %}
+        <div>
+          {% render 'image', 
+              class: 'product-image ', 
+              image: image,
+              width: 700
+            %}    
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 {% schema %}

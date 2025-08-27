@@ -6,16 +6,12 @@
 {% endcomment %}
 
 <div class="flex">
-  <div class="w-36">
-    <ul>
-      <li>sidebar</li>
-    </ul>
-  </div>
+  {% render 'sidebar' %}
   <div class="grow">
-    <div class="collection-products gap-2">
+    <div class="collection-products">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
-          <div class="collection-product" >
+          <div class="collection-product">
             {% if product.featured_image %}
               {% assign vt_handle = product.title | handleize %}
               {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
@@ -24,55 +20,27 @@
                 style:  vt,
                 image: product.featured_image,
                 url: product.url,
-                width: auto,
-                height: 450,
-                crop: 'center'
+                width: 700
               %}
             {% endif %}
-            <div class="collection-product__content">
-              <p class="font-mono">{{ product.title | escape | link_to: product.url }}</p>
-              <p>{{ product.price | money }}</p>
+            <div class="collection-product__content" >
+              <a href={{product.url}}> 
+                <p>{{ product.title }}</p>
+                <p class="font-mono">{{ product.price | money }}</p>
+              </a>
             </div>
           </div>
         {% endfor %}
-
         {{ paginate | default_pagination }}
       {% endpaginate %}
     </div>
-
   </div>
 </div>
-<h1>{{ collection.title }}</h1>
-
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: auto,
-            height: 1000,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
-</div>
-
 {% stylesheet %}
   .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 200px));
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
   }
 {% endstylesheet %}
 
