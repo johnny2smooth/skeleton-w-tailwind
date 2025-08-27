@@ -5,27 +5,21 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="flex gap-8">
+<div class="flex gap-24">
   {% render 'sidebar' %}
-  <div id="photos" class="h-[90vh] pb-4 px-2 overflow-y-scroll shadow-xl/20 no-scrollbar flex flex-col gap-4 rounded-xl" style="width: 45%;">
+  <div id="photos" class="h-[90vh] pb-4 p-2 mt-2 overflow-y-scroll shadow-md hover:shadow-lg/30 transition duration-100 ease-in no-scrollbar flex flex-col gap-4 rounded-xl w-[45%] z-10">
     {% for image in product.images %}
-      {% if forloop.first %}
-        <div class="shadow-lg/20 rounded-xl" style="view-transition-name: photo-{{product.title | handleize }};">
+      <div class="shadow-sm hover:shadow-md rounded-xl -z-10" 
+        {% if forloop.first %} 
+          style="view-transition-name: photo-{{product.title | handleize }};"
+        {% endif%}
+        >
           {% render 'image', 
             class: 'product-image rounded-xl', 
             image: image,
-            width: 700
+            width: 900
           %}    
         </div>
-      {% else %}
-        <div class="shadow-lg/20 rounded-xl">
-          {% render 'image', 
-              class: 'product-image rounded-xl', 
-              image: image,
-              width: 700
-            %}    
-        </div>
-      {% endif %}
     {% endfor %}
   </div>
   {% render 'product-info' %}

@@ -1,8 +1,8 @@
 <div id="product-info" class="product-info w-64 grow font-mono flex flex-col gap-12">
-    <div class="flex flex-col gap-2>
-      <h1 class="text-lg">{{ product.vendor }}</h1>
+    <div class="flex flex-col gap-2">
+      <h1 class="text-sm">{{ product.vendor }}</h1>
       <p>{{ product.title }}</p>
-      <p>{{ product.price | money }}</p>
+      <p class="text-sm">{{ product.price | money }}</p>
     </div>
     <div class="product-form flex flex-col gap-4">
       {% form 'product', product %}
@@ -29,5 +29,13 @@
         {{ form | payment_button }}
       {% endform %}
     </div>
-    <p>{{ product.description }}</p>
+    <div id="description">
+      {{ product.description }}
+    </div>
 </div>
+
+<style>
+#description p {
+  font-size: 12px;
+}
+</style>
