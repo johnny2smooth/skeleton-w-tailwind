@@ -1,9 +1,10 @@
-<div id="product-info" class="product-info w-64 grow font-mono">
-    <p>{{ product.vendor }}</p>
-    <p>{{ product.title }}</p>
-    <p>{{ product.price | money }}</p>
-    <p>{{ product.description }}</p>
-    <div class="product-form">
+<div id="product-info" class="product-info w-64 grow font-mono flex flex-col gap-12">
+    <div class="flex flex-col gap-2>
+      <h1 class="text-lg">{{ product.vendor }}</h1>
+      <p>{{ product.title }}</p>
+      <p>{{ product.price | money }}</p>
+    </div>
+    <div class="product-form flex flex-col gap-4">
       {% form 'product', product %}
         {% assign current_variant = product.selected_or_first_available_variant %}
 
@@ -15,15 +16,18 @@
                 selected="selected"
               {% endif %}
             >
-              {{ variant.title }} - {{ variant.price | money }}
+              size?
             </option>
           {% endfor %}
         </select>
 
+        <!-- 
         <input type="text" name="quantity" min="1" value="1">
+        -->
 
-        <input type="submit" value="Add to cart">
+        <input type="submit" value="Add to cart" class="text-red-700">
         {{ form | payment_button }}
       {% endform %}
     </div>
+    <p>{{ product.description }}</p>
 </div>

@@ -11,19 +11,19 @@
     <div class="collection-products">
       {% paginate collection.products by 20 %}
         {% for product in collection.products %}
-          <div class="collection-product">
+          <div class="collection-product px-2 pt-2 hover:shadow-lg/20 hover:-translate-y-1 transition duration-400 ease-in rounded-xl">
             {% if product.featured_image %}
               {% assign vt_handle = product.title | handleize %}
               {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
               {% render 'image',
-                class: 'collection-product__image',
+                class: 'collection-product__image hover:shadow-lg/20 hover:-translate-y-1 transition duration-200 ease-in rounded-lg',
                 style:  vt,
                 image: product.featured_image,
                 url: product.url,
                 width: 700
               %}
             {% endif %}
-            <div class="collection-product__content" >
+            <div class="collection-product__content p-4 rounded-lg" >
               <a href={{product.url}}> 
                 <p>{{ product.title }}</p>
                 <p class="font-mono">{{ product.price | money }}</p>

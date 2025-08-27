@@ -7,21 +7,20 @@
 
 <div class="flex gap-8">
   {% render 'sidebar' %}
-  {% render 'product-info' %}
-  <div id="photos" style="width: 35%;">
+  <div id="photos" class="h-[90vh] pb-4 px-2 overflow-y-scroll shadow-xl/20 no-scrollbar flex flex-col gap-4 rounded-xl" style="width: 45%;">
     {% for image in product.images %}
       {% if forloop.first %}
-        <div style="view-transition-name: photo-{{product.title | handleize }};">
+        <div class="shadow-lg/20 rounded-xl" style="view-transition-name: photo-{{product.title | handleize }};">
           {% render 'image', 
-            class: 'product-image', 
+            class: 'product-image rounded-xl', 
             image: image,
             width: 700
           %}    
         </div>
       {% else %}
-        <div>
+        <div class="shadow-lg/20 rounded-xl">
           {% render 'image', 
-              class: 'product-image ', 
+              class: 'product-image rounded-xl', 
               image: image,
               width: 700
             %}    
@@ -29,6 +28,7 @@
       {% endif %}
     {% endfor %}
   </div>
+  {% render 'product-info' %}
 </div>
 
 {% schema %}
