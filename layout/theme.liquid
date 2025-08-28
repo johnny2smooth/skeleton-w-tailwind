@@ -17,9 +17,13 @@
     <meta name="view-transition" content="same-origin" />
   </head>
 
-  <body class="py-8">
-    {{ content_for_layout }}
-
-    {% sections 'footer-group' %}
+  <body class="py-8 flex">
+    <aside class="h-screen sticky top-0">
+      {% render 'sidebar' %}
+    </aside>
+    <main>
+      {{ content_for_layout }}
+      {% sections 'footer-group' %}
+    </main>
   </body>
 </html>

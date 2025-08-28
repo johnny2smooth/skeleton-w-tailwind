@@ -6,10 +6,9 @@
 {% endcomment %}
 
 <div class="flex gap-4">
-  {% render 'sidebar' %}
-  <div class="p-4 grow h-[90vh] overflow-y-scroll inset-shadow-sm rounded-xl">
-    <div class="collection-products ">
-      {% paginate collection.products by 20 %}
+  <div class="p-4 grow inset-shadow-sm rounded-xl">
+      {% paginate collection.products by 15 %}
+      <div class="collection-products ">
         {% for product in collection.products %}
           <div class="collection-product px-2 pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
             {% if product.featured_image %}
@@ -25,22 +24,27 @@
             {% endif %}
             <div class="collection-product__content p-4 rounded-xl" >
               <a href={{product.url}}> 
-                <p>{{ product.title }}</p>
-                <p class="font-mono">{{ product.price | money }}</p>
+                <p style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
+                <p style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
               </a>
             </div>
           </div>
         {% endfor %}
-        {{ paginate | default_pagination }}
-      {% endpaginate %}
+   
     </div>
+        <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
+      {% endpaginate %}
   </div>
 </div>
+
 {% stylesheet %}
   .collection-products {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
+  }
+  span.current {
+    color: oklch(93% 0.034 272.788);
   }
 {% endstylesheet %}
 
