@@ -1,4 +1,10 @@
-<div id="product-info" class="product-info w-64 grow font-mono flex flex-col gap-12">
+<div id="product-info" class="self-end product-info w-64 p-4 grow rounded-xl shadow-md/30 font-mono flex flex-col justify-end gap-4">
+    <details>
+      <summary class="text-xs">Details</summary>
+      <div id="description">
+        {{ product.description }}
+      </div>
+    </details>
     <div class="flex flex-col gap-2">
       <h1 class="text-sm">{{ product.vendor }}</h1>
       <p style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
@@ -29,13 +35,14 @@
         {{ form | payment_button }}
       {% endform %}
     </div>
-    <div id="description">
-      {{ product.description }}
-    </div>
 </div>
 
 <style>
-#description p {
+#description {
+  padding-top: 2rem;
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 </style>

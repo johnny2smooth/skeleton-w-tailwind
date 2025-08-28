@@ -23,9 +23,10 @@
               %}
             {% endif %}
             <div class="collection-product__content p-4 rounded-xl" >
-              <a href={{product.url}}> 
-                <p style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
-                <p style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
+              <a class="font-mono" href={{product.url}}> 
+                <p class="text-xs">{{product.vendor}}</p>
+                <p class="text-sm" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
+                <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
               </a>
             </div>
           </div>
