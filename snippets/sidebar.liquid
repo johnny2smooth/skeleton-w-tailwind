@@ -1,24 +1,54 @@
-<div id="sidebar" class="min-w-48 shadow-sm shadow-transparent transition duration-100 ease-in rounded-xl" style="view-transition-name: sidebar">
-    {% assign categories = "TODAY'S DROP,VIEW ALL,T-SHIRTS,
-                            BUTTON-UP SHIRTS,
-                            JACKETS,
-                            SWEATERS,
-                            SWEATSHIRTS,
-                            PANTS,
-                            SHORTS,
-                            OVERALLS,
-                            COVERALLS,
-                            HEADWEAR,
-                            BAGS,
-                            ACCESSORIES,
-                            SHOES,
-                            MYSTERY BOXES,
-                            MERCH,
-                            GIFT CARDS,
-                            CULT CLASSIC" | split: "," %}
-    <ul class="p-4 flex flex-col gap-4 font-light">
+{% assign categories = "TODAY'S DROP,VIEW ALL,T-SHIRTS,BUTTON-UP SHIRTS,JACKETS,SWEATERS,SWEATSHIRTS,PANTS,SHORTS,OVERALLS,COVERALLS,HEADWEAR,BAGS,ACCESSORIES,SHOES,MYSTERY BOXES,MERCH,GIFT CARDS,CULT CLASSIC" | split: "," %}
+
+<div id="sidebar" 
+    class="min-w-48 p-4 h-full hover:shadow-sm transition duration-200 ease-in rounded-xl flex flex-col gap-4 justify-between" 
+    style="view-transition-name: sidebar"
+    >
+    <ul class="flex flex-col gap-4 font-light">
         {% for cat in categories %}
             <li class="text-xs no-underline  hover:underline hover:text-indigo-400 transition duration-100 ease-in"><a href="collections/{{cat | strip | replace: " ","-" | downcase}}">{{cat}}</a></li>
         {% endfor %}
     </ul>
+    <a class="w-24 self-center logo" style="view-transition-name: spinning-flower" href="/">
+        <svg width="190" height="190" viewBox="0 0 390 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="195.5" cy="97.5" r="97" fill="#1E1E1E" stroke="#D9D9D9"/>
+        <circle cx="195" cy="159" r="35" fill="white"/>
+        <circle cx="97.5" cy="195.5" r="97" transform="rotate(-90 97.5 195.5)" fill="#1E1E1E" stroke="#D9D9D9"/>
+        <circle cx="159" cy="196" r="35" transform="rotate(-90 159 196)" fill="white"/>
+        <circle cx="195.5" cy="292.5" r="97" transform="rotate(-180 195.5 292.5)" fill="#1E1E1E" stroke="#D9D9D9"/>
+        <circle cx="196" cy="231" r="35" transform="rotate(-180 196 231)" fill="white"/>
+        <circle cx="292.5" cy="198.5" r="97" transform="rotate(90 292.5 198.5)" fill="#1E1E1E" stroke="#D9D9D9"/>
+        <circle cx="231" cy="198" r="35" transform="rotate(90 231 198)" fill="white"/>
+        <mask id="path-9-inside-1_1_520" fill="white">
+        <path d="M195.5 0C208.304 1.52685e-07 220.982 2.52192 232.812 7.42176C244.641 12.3216 255.389 19.5034 264.443 28.5571C273.497 37.6109 280.678 48.3592 285.578 60.1884C290.478 72.0177 293 84.6962 293 97.5001C293 110.304 290.478 122.983 285.578 134.812C280.678 146.641 273.497 157.389 264.443 166.443C255.389 175.497 244.641 182.679 232.811 187.578C220.982 192.478 208.304 195 195.5 195L195.5 97.5V0Z"/>
+        </mask>
+        <path d="M195.5 0C208.304 1.52685e-07 220.982 2.52192 232.812 7.42176C244.641 12.3216 255.389 19.5034 264.443 28.5571C273.497 37.6109 280.678 48.3592 285.578 60.1884C290.478 72.0177 293 84.6962 293 97.5001C293 110.304 290.478 122.983 285.578 134.812C280.678 146.641 273.497 157.389 264.443 166.443C255.389 175.497 244.641 182.679 232.811 187.578C220.982 192.478 208.304 195 195.5 195L195.5 97.5V0Z" fill="#1E1E1E" stroke="#D9D9D9" stroke-width="2" mask="url(#path-9-inside-1_1_520)"/>
+        <path d="M195 124C204.283 124 213.185 127.687 219.749 134.251C226.313 140.815 230 149.717 230 159C230 168.283 226.313 177.185 219.749 183.749C213.185 190.313 204.283 194 195 194L195 159L195 124Z" fill="white"/>
+        <rect x="195" y="1" width="2" height="123" fill="#1E1E1E"/>
+        <circle cx="195.5" cy="195.5" r="4.5" fill="#1E1E1E"/>
+        </svg>
+    </a>
 </div>
+<style>
+/* Base: define the spin but keep it paused */
+.logo svg {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: spin 20s linear infinite;
+  animation-play-state: paused;       /* paused by default */
+  will-change: transform;             /* smoother GPU compositing */
+}
+
+/* Run only while hovered; on mouseout it pauses in-place */
+.logo:hover svg {
+  animation-play-state: running;
+}
+
+/* Very slow clockwise spin */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .logo svg { animation: none; }
+}
+</style>
