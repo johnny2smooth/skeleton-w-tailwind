@@ -10,7 +10,8 @@
       {% paginate collection.products by 15 %}
       <div class="collection-products ">
         {% for product in collection.products %}
-          <div class="collection-product px-2 pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
+          <div  
+          class="collection-product px-2 pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
             {% if product.featured_image %}
               {% assign vt_handle = product.title | handleize %}
               {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
@@ -22,7 +23,7 @@
                 width: 900
               %}
             {% endif %}
-            <div class="collection-product__content p-4 rounded-xl" >
+            <div style="view-transition-name: {{product.title | handleize }}-card" class="collection-product__content p-4 rounded-xl" >
               <a href={{product.url}}> 
                 <p class="text-xs">{{product.vendor}}</p>
                 <p class="text-sm" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>

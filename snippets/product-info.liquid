@@ -5,10 +5,10 @@
         {{ product.description }}
       </div>
     </details>
-    <div class="flex flex-col gap-2 font-light">
+    <div style="view-transition-name: {{product.title | handleize }}-card" class="flex flex-col gap-2 font-light">
       <h1 class="text-sm">{{ product.vendor }}</h1>
-      <p style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
-      <p style="view-transition-name: {{product.title | handleize}}-price"class="text-sm">{{ product.price | money }}</p>
+      <p>{{ product.title }}</p>
+      <p class="text-sm">{{ product.price | money }}</p>
     </div>
     <div class="product-form flex flex-col gap-4">
       {% form 'product', product %}
