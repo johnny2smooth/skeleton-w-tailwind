@@ -7,7 +7,7 @@
 
 <div class="flex gap-4">
   <div class="p-4 grow inset-shadow-sm rounded-xl">
-      {% paginate collection.products by 15 %}
+    {% paginate collection.products by 15 %}
       <div class="collection-products ">
         {% for product in collection.products %}
           <div  
@@ -32,10 +32,9 @@
             </div>
           </div>
         {% endfor %}
-   
-    </div>
-        <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
-      {% endpaginate %}
+      </div>
+    <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
+    {% endpaginate %}
   </div>
 </div>
 

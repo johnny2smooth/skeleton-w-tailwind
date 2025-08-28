@@ -1,5 +1,5 @@
-<div id="product-info" class="self-end product-info w-64 p-4 grow rounded-xl shadow-md/30 flex flex-col justify-end gap-4">
-    <details class="font-mono">
+<div id="product-info" class="self-end product-info w-64 p-4 grow rounded-xl shadow-md hover:shadow-lg/30 transition duration-200 flex flex-col justify-end gap-4">
+    <details class="font-mono hover:text-indigo-400">
       <summary class="text-xs">Details</summary>
       <div id="description">
         {{ product.description }}
@@ -13,10 +13,10 @@
     <div class="product-form flex flex-col gap-4">
       {% form 'product', product %}
         {% assign current_variant = product.selected_or_first_available_variant %}
-
-        <select name="id">
+        <select name="id" class="text-xs">
           {% for variant in product.variants %}
             <option
+              class="text-xs"
               value="{{ variant.id }}"
               {% if variant == current_variant %}
                 selected="selected"
@@ -27,11 +27,8 @@
           {% endfor %}
         </select>
 
-        <!-- 
         <input type="text" name="quantity" min="1" value="1">
-        -->
-
-        <input type="submit" value="Add to cart" class="text-red-700">
+        <input type="submit" value="Add to cart" class="text-indigo-300 text-sm">
         {{ form | payment_button }}
       {% endform %}
     </div>
