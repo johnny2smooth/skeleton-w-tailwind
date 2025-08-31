@@ -1,45 +1,23 @@
-<div id="product-info" class="self-end product-info w-64 py-8 px-4 w-full rounded-xl shadow-md hover:shadow-lg/30 transition duration-200 flex flex-col justify-end gap-4">
-    <details class="font-mono hover:text-indigo-400">
-      <summary class="text-xs">Details</summary>
-      <div id="description">
-        {{ product.description }}
-      </div>
-    </details>
-    <div style="view-transition-name: {{product.title | handleize }}-card" class="flex flex-col gap-2 font-light">
-      <h1 class="text-sm">{{ product.vendor }}</h1>
-      <p>{{ product.title }}</p>
-      <p class="text-sm">{{ product.price | money }}</p>
+<div id="product-information" class="collection-product__content flex flex-col gap-4 p-4 rounded-xl" >
+  <a href={{product.url}}> 
+    <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-{{product-vendor| handleize}}">{{product.vendor}}</p>
+    <p class="text-sm" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
+    <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
+  </a>
+  <details class="font-mono hover:text-indigo-400">
+    <summary class="text-xs">Details</summary>
+    <div id="description">
+      {{ product.description }}
     </div>
-    <div class="product-form flex flex-col gap-4 ">
-      {% form 'product', product %}
-        {% assign current_variant = product.selected_or_first_available_variant %}
-        <select name="id" class="text-xs">
-          {% for variant in product.variants %}
-            <option
-              class="text-xs"
-              value="{{ variant.id }}"
-              {% if variant == current_variant %}
-                selected="selected"
-              {% endif %}
-            >
-              size?
-            </option>
-          {% endfor %}
-        </select>
-
-        <input type="text" name="quantity" min="1" value="1">
-        <input type="submit" value="Add to bart" class="text-indigo-300 text-sm">
-        {{ form | payment_button }}
-      {% endform %}
-    </div>
+  </details>
 </div>
 
 <style>
-#description {
-  padding-top: 2rem;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
+  #description {
+    padding-top: 2rem;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 </style>
