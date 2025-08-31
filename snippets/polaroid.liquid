@@ -1,0 +1,33 @@
+<div class="collection-product max-w-lg px-2 pt-2 shadow-md/20 -translate-y-1 transition duration-300 ease-in rounded-xl">
+  <div id= "polaroid-pictures" class="max-h-[80vh] overflow-y-scroll">
+    {% for image in product.images %}
+      {% if forloop.first %}
+        {% assign vt_handle = product.title | handleize %}
+        {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
+        {% render 'image', 
+          style: vt,
+          class: 'collection-product__image shadow-md/20 -translate-y-1 transition duration-200 ease-in rounded-xl',
+          image: image,
+          width: 900
+        %}    
+      {% endif %}
+        {% render 'image', 
+          class: 'collection-product__image shadow-md/20 -translate-y-1 transition duration-200 ease-in rounded-xl',
+          image: image,
+          width: 900
+        %}    
+    {% endfor %}
+  </div>
+    <div style="view-transition-name: {{product.title | handleize }}-card" class="collection-product__content p-4 rounded-xl" >
+      <a href={{product.url}}> 
+        <p class="text-xs">{{product.vendor}}</p>
+        <p class="text-sm" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
+        <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
+      </a>
+    </div>
+</div>
+<style>
+#polaroid-pictures div {
+  margin-bottom: 1rem;
+}
+</style>

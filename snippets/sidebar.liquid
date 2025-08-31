@@ -1,4 +1,4 @@
-{% assign categories = "TODAY'S DROP,VIEW ALL,T-SHIRTS,BUTTON-UP SHIRTS,JACKETS,SWEATERS,SWEATSHIRTS,PANTS,SHORTS,OVERALLS,COVERALLS,HEADWEAR,BAGS,ACCESSORIES,SHOES,MYSTERY BOXES,MERCH,GIFT CARDS,CULT CLASSIC" | split: "," %}
+{% assign categories = "TODAY'S DROP,ALL,T-SHIRTS,BUTTON-UP SHIRTS,JACKETS,SWEATERS,SWEATSHIRTS,PANTS,SHORTS,OVERALLS,COVERALLS,HEADWEAR,BAGS,ACCESSORIES,SHOES,MYSTERY BOXES,MERCH,GIFT CARDS,CULT CLASSIC" | split: "," %}
 
 <div id="sidebar" 
     class="min-w-48 p-4 h-full shadow-md hover:shadow-lg transition duration-100 ease-in rounded-xl flex flex-col gap-4 justify-between" 
@@ -6,7 +6,7 @@
     >
     <ul class="flex flex-col gap-4 font-light">
         {% for cat in categories %}
-            <li class="text-xs no-underline  hover:underline hover:text-indigo-400 transition duration-50 ease-out"><a href="collections/{{cat | strip | replace: " ","-" | downcase}}">{{cat}}</a></li>
+            <li class="text-xs no-underline  hover:underline hover:text-indigo-400 transition duration-50 ease-out"><a href="/collections/{{cat | strip | replace: " ","-" | downcase}}">{{cat}}</a></li>
         {% endfor %}
     </ul>
     <a class="w-24 self-center logo" style="view-transition-name: spinning-flower" href="/">
