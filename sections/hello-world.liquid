@@ -1,147 +1,76 @@
-{% comment %}
-  Welcome to Shopify theme development!
-{% endcomment %}
-
-<div class="welcome full-width">
-  <div class="welcome-content">
-    <div>
-      <h1 class="text-4xl">Hello, my tweets!</h1>
-
-      <p class="welcome-description">
-        The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started.
-        Designed with modularity, maintainability, and Shopify's best practices in mind.
-      </p>
-
-      <p class="welcome-description">
-        Themes shape the online store experience for merchants and their customers. Build fast, flexible themes at scale
-        using Liquid, Shopify's theme templating language, along with HTML, CSS, JavaScript, and JSON.
-      </p>
-    </div>
-    <div class="icon">
-      <img src="{{ 'shoppy-x-ray.svg' | asset_url }}" width="300" height="300">
-    </div>
-  </div>
-  {% for product in collections['all'] %}
-    <p>hola!</p>
-  {%endfor %}
-</div>
-
-<div class="highlights">
-  <div class="highlight">
-    <h3>Key Concepts</h3>
-    <p class="highlight-description">
-      Shopify themes are a package of template files, building blocks, and supporting assets. Use these building blocks
-      to create modular, customizable themes.
-    </p>
-    <p>{{ 'Learn more about key concepts' | link_to: 'https://shopify.dev/docs/storefronts/themes/architecture' }}</p>
-  </div>
-
-  <div class="highlight">
-    <h3>Liquid</h3>
-    <p class="highlight-description">
-      The Liquid templating language is the backbone of Shopify themes, and is used to load dynamic content on
-      storefronts. Extend Liquid objects to store and present custom data using metafields.
-    </p>
-    <p>{{ 'View the Liquid reference' | link_to: 'https://shopify.dev/docs/api/liquid' }}</p>
-  </div>
-
-  <div class="highlight">
-    <h3>Best Practices</h3>
-    <p class="highlight-description">
-      To optimize your theme development experience, Shopify has established a set of best practices that you can refer
-      to when developing your theme and setting up your toolchains and processes.
-    </p>
-    <p>{{ 'Follow best practices' | link_to: 'https://shopify.dev/docs/storefronts/themes/best-practices' }}</p>
+{% assign my_collection = collections['all'] %}
+<div class="flex gap-1 md:gap-4 px-2 py-2">
+  <div class="grow md:inset-shadow-sm md:rounded-xl">
+    {% paginate my_collection.products by 14 %}
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:pt-4">
+        {% for product in my_collection.products %}
+          {% assign product_id = product.title | handleize %}
+          <div 
+          class="product-card collection-product md:px-2 md:pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
+            {% if product.featured_image %}
+              {% assign vt_handle = product.title | handleize %}
+              {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
+              {% render 'image',
+                class: 'collection-product__image hover:shadow-md/20 hover:-translate-y-1 transition duration-200 ease-in md:rounded-xl',
+                style:  vt,
+                image: product.featured_image,
+                url: product.url,
+                width: 1100
+              %}
+            {% endif %}
+            <div  style="view-transition-name: {{ product_id }}-card" class="collection-product__content md:p-4 rounded-xl" >
+              <a href={{product.url}}> 
+                <p class="text-sm" style="view-transition-name: {{product.title | handleize}}-{{product-vendor| handleize}}">{{product.vendor}}</p>
+                <p class="text-xs" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
+                <div class="flex justify-between align-end items-center">
+                  <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
+                  <div 
+                    class="buy-now-square w-1 h-1 transition duration-500 rounded-sm bg-transparent"
+                    style="view-transition-name: {{product_id}}-buy-now-square">
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
+    {% endpaginate %}
   </div>
 </div>
 
+      <div class="sticky bottom-0 left-0">
+        <div class="relative bg-white opacity-90 mx-4">
+          <ul class="flex justify-center align-center text-xl font-mono items-center gap-6">
+            <li>Shop</li>
+            <li>Search</li>
+            <li>Account</li>
+            <li>Cart</li>
+          </ul>
+          <div class="flex justify-center align-center items-center">
+          </div>
+        </div>
+      </div>
+<style>
+  .product-card:hover .buy-now-square {
+    background-color: oklch(86.9% 0.022 252.894);
+  }
+</style>
 {% stylesheet %}
-  .welcome {
-    display: grid;
-    grid-template-columns: var(--content-grid);
-    background-color: #f6f6f7;
-    padding: 72px 0;
+  .collection-products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+  }
+  span.current {
+    color: oklch(93% 0.034 272.788);
   }
 
-  .welcome-content {
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    padding: 0 24px;
-  }
-
-  .welcome-description {
-    max-width: 80ch;
-    line-height: 1.4;
-    margin-top: 1.5rem;
-  }
-
-  .icon {
-    width: 300px;
-  }
-
-  .highlights {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 50px;
-  }
-
-  @media (max-width: 1100px) {
-    .highlights {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .highlight {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 24px;
-    border-radius: 8px;
-    background-color: #eef3ff;
-    color: rgb(92, 95, 98);
-    line-height: 1.4;
-  }
-
-  .highlight > * + * {
-    margin-top: 1rem;
-  }
-
-  .highlight h3 {
-    font-size: 1rem;
-    color: rgb(32, 34, 35);
-  }
-
-  .highlight-description {
-    flex: 1 1;
-  }
-
-  .highlight a {
-    display: flex;
-    width: fit-content;
-    background-color: rgb(250, 251, 251);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset, rgba(255, 255, 255, 0.9) 0px 2px 0px 0px inset;
-    border: 1px solid rgb(140, 145, 150);
-    border-radius: 4px;
-    color: rgb(92, 95, 98);
-    padding: 3px 10px 5px;
-    text-decoration: none;
-  }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Hello World",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Hello World Template",
-      "category": "Demo"
-    }
-  ]
+  "name": "t:general.collection",
+  "settings": []
 }
 {% endschema %}
