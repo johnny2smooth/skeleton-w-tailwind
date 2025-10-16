@@ -11,7 +11,7 @@
               {% assign vt_handle = product.title | handleize %}
               {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
               {% render 'image',
-                class: 'collection-product__image hover:shadow-md/20 hover:-translate-y-1 transition duration-200 ease-in md:rounded-xl',
+                class: 'collection-product__image hover:shadow-md/20 hover:-translate-y-1 transition duration-200 ease-in rounded-xl',
                 style:  vt,
                 image: product.featured_image,
                 url: product.url,

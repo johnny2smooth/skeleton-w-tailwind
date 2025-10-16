@@ -10,7 +10,6 @@
     --color-red-200: oklch(88.5% 0.062 18.334);
     --color-indigo-300: oklch(78.5% 0.115 274.713);
     --color-indigo-400: oklch(67.3% 0.182 276.935);
-    --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -21,7 +20,6 @@
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
-    --font-weight-extralight: 200;
     --font-weight-light: 300;
     --radius-sm: 0.25rem;
     --radius-lg: 0.5rem;
@@ -266,6 +264,9 @@
   .h-1 {
     height: calc(var(--spacing) * 1);
   }
+  .h-\[70vh\] {
+    height: 70vh;
+  }
   .h-\[92\.5vh\] {
     height: 92.5vh;
   }
@@ -397,6 +398,9 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-indigo-300 {
+    background-color: var(--color-indigo-300);
+  }
   .bg-red-200 {
     background-color: var(--color-red-200);
   }
@@ -408,6 +412,9 @@
   }
   .object-scale-down {
     object-fit: scale-down;
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -423,6 +430,9 @@
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
@@ -452,8 +462,8 @@
     --tw-font-weight: var(--font-weight-light);
     font-weight: var(--font-weight-light);
   }
-  .text-indigo-300 {
-    color: var(--color-indigo-300);
+  .text-black {
+    color: var(--color-black);
   }
   .italic {
     font-style: italic;
@@ -606,14 +616,39 @@
       display: block;
     }
   }
+  .md\:h-\[92\.5vh\] {
+    @media (width >= 48rem) {
+      height: 92.5vh;
+    }
+  }
+  .md\:w-64 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 64);
+    }
+  }
+  .md\:w-\[55\%\] {
+    @media (width >= 48rem) {
+      width: 55%;
+    }
+  }
   .md\:grid-cols-3 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
   .md\:gap-4 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing) * 4);
+    }
+  }
+  .md\:gap-8 {
+    @media (width >= 48rem) {
+      gap: calc(var(--spacing) * 8);
     }
   }
   .md\:rounded-xl {
@@ -629,6 +664,11 @@
   .md\:px-2 {
     @media (width >= 48rem) {
       padding-inline: calc(var(--spacing) * 2);
+    }
+  }
+  .md\:px-4 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 4);
     }
   }
   .md\:py-8 {

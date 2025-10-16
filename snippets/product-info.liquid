@@ -1,8 +1,8 @@
 <div id="product-information" class="collection-product__content flex flex-col gap-4 p-4 rounded-xl" >
   <a href={{product.url}}> 
-    <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-{{product-vendor| handleize}}">{{product.vendor}}</p>
-    <p class="text-sm" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
-    <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
+    <p class="text-xs" >{{product.vendor}}</p>
+    <p class="text-sm" >{{ product.title }}</p>
+    <p class="text-xs" class="font-mono">{{ product.price | money }}</p>
   </a>
   <details class="font-mono hover:text-indigo-400">
     <summary class="text-xs">Details</summary>
