@@ -11,6 +11,15 @@
   data-controller="floatmenu"
   class="fixed inset-x-0 bottom-4 mx-auto max-w-md rounded-2xl bg-white shadow-xl transition-all duration-300 overflow-hidden"
 >
+
+  <!-- COLLAPSIBLE CONTENT -->
+  <div
+    data-floatmenu-target="panel"
+    class="h-0 opacity-0 transition-all duration-300 overflow-hidden border-t border-gray-200"
+  >
+    <!-- Dynamic content gets swapped here -->
+    <div data-floatmenu-target="content" class="p-4 text-sm text-gray-700"></div>
+  </div>
   <!-- NAV BUTTONS -->
   <div
     data-floatmenu-target="buttons"
@@ -39,14 +48,6 @@
     </button>
   </div>
 
-  <!-- COLLAPSIBLE CONTENT -->
-  <div
-    data-floatmenu-target="panel"
-    class="h-0 opacity-0 transition-all duration-300 overflow-hidden border-t border-gray-200"
-  >
-    <!-- Dynamic content gets swapped here -->
-    <div data-floatmenu-target="content" class="p-4 text-sm text-gray-700"></div>
-  </div>
 </div>
 
 {% schema %}
