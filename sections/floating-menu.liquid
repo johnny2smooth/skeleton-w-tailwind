@@ -8,179 +8,44 @@
 {% endcomment %}
 
 <div
-  class="fixed inset-x-0 bottom-0 z-50 pb-[max(env(safe-area-inset-bottom),1rem)] lg:hidden pointer-events-none"
   data-controller="floatmenu"
-  data-floatmenu-close-on-scroll="{{ section.settings.close_on_scroll }}"
+  class="fixed inset-x-0 bottom-4 mx-auto max-w-md rounded-2xl bg-white shadow-xl transition-all duration-300 overflow-hidden"
 >
-  <!-- Bar container (centered, with gutters) -->
-  <div class="mx-auto w-full max-w-screen-xl px-4">
-    <nav
-      class="pointer-events-auto rounded-2xl border border-neutral-200 bg-white/90 backdrop-blur shadow-lg"
-      aria-label="Floating menu"
+  <!-- NAV BUTTONS -->
+  <div
+    data-floatmenu-target="buttons"
+    class="flex justify-around items-center px-3 py-2 border-t border-gray-200"
+  >
+    <button
+      data-action="click->floatmenu#toggle"
+      data-key="menu"
+      class="py-2 px-3 text-sm font-medium"
     >
-      <ul class="flex items-stretch justify-between gap-1 p-1.5">
-        <!-- Menu -->
-        <li>
-          <button
-            type="button"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium hover:bg-neutral-100 active:bg-neutral-200"
-            data-action="click->floatmenu#toggle"
-            data-key="menu"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Menu</span>
-            <!-- burger -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 15 10" fill="none">
-              <path d="M0 1h15M0 4h15M0 7h15M0 10h15" stroke="currentColor" stroke-width="1"/>
-            </svg>
-          </button>
-        </li>
-
-        <!-- Shop -->
-        <li>
-          <button
-            type="button"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium hover:bg-neutral-100 active:bg-neutral-200"
-            data-action="click->floatmenu#toggle"
-            data-key="shop"
-            aria-expanded="false"
-          >
-            <span>Shop</span>
-          </button>
-        </li>
-
-        <!-- Account -->
-        <li>
-          <a
-            href="{{ routes.account_url }}"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium hover:bg-neutral-100 active:bg-neutral-200"
-          >
-            <span>Account</span>
-          </a>
-        </li>
-
-        <!-- Search -->
-        <li>
-          <button
-            type="button"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium hover:bg-neutral-100 active:bg-neutral-200"
-            data-action="click->floatmenu#toggle"
-            data-key="search"
-            aria-expanded="false"
-          >
-            <span>Search</span>
-          </button>
-        </li>
-
-        <!-- Cart -->
-        <li>
-          <a
-            href="{{ routes.cart_url }}"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium hover:bg-neutral-100 active:bg-neutral-200"
-          >
-            <span>Cart</span>
-            <span
-              class="grid min-w-[22px] place-items-center rounded-full border border-black text-[0.7rem] leading-none px-1.5 py-0.5"
-              data-floatmenu-target="cartCount"
-            >
-              {{ cart.item_count | default: 0 }}
-            </span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      Menu
+    </button>
+    <button
+      data-action="click->floatmenu#toggle"
+      data-key="shop"
+      class="py-2 px-3 text-sm font-medium"
+    >
+      Shop
+    </button>
+    <button
+      data-action="click->floatmenu#toggle"
+      data-key="account"
+      class="py-2 px-3 text-sm font-medium"
+    >
+      Account
+    </button>
   </div>
 
-  {%- comment -%}
-    PANELS — fixed so they float above the bar, with same gutters.
-    Each panel’s content is configurable via section settings (menus).
-  {%- endcomment -%}
+  <!-- COLLAPSIBLE CONTENT -->
   <div
-    class="pointer-events-none fixed inset-x-0"
-    style="bottom: calc(env(safe-area-inset-bottom) + 5.5rem);"
-    aria-live="polite"
+    data-floatmenu-target="panel"
+    class="h-0 opacity-0 transition-all duration-300 overflow-hidden border-t border-gray-200"
   >
-    <div class="mx-auto w-full max-w-screen-xl px-4">
-      <!-- MENU panel -->
-      <div
-        class="pointer-events-auto hidden rounded-2xl border border-neutral-200 bg-white shadow-xl"
-        data-floatmenu-target="panel"
-        data-key="menu"
-      >
-        <div class="p-4">
-          {% if section.settings.menu_main != blank %}
-            <nav aria-label="Main">
-              <ul class="space-y-1">
-                {% for link in linklists[section.settings.menu_main].links %}
-                  <li>
-                    <a href="{{ link.url }}" class="block rounded px-3 py-2 text-sm hover:bg-neutral-100">
-                      {{ link.title }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </nav>
-          {% else %}
-            <p class="px-3 py-2 text-sm text-neutral-500">Choose a “Main menu” in section settings.</p>
-          {% endif %}
-        </div>
-      </div>
-
-      <!-- SHOP panel -->
-      <div
-        class="pointer-events-auto hidden rounded-2xl border border-neutral-200 bg-white shadow-xl"
-        data-floatmenu-target="panel"
-        data-key="shop"
-      >
-        <div class="p-4">
-          {% if section.settings.menu_shop != blank %}
-            <nav aria-label="Shop">
-              <ul class="space-y-1">
-                {% for link in linklists[section.settings.menu_shop].links %}
-                  <li>
-                    <a href="{{ link.url }}" class="flex items-center justify-between rounded px-3 py-2 text-sm hover:bg-neutral-100">
-                      <span>{{ link.title }}</span>
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </nav>
-          {% else %}
-            <p class="px-3 py-2 text-sm text-neutral-500">Choose a “Shop menu” in section settings.</p>
-          {% endif %}
-        </div>
-      </div>
-
-      <!-- SEARCH panel -->
-      <div
-        class="pointer-events-auto hidden rounded-2xl border border-neutral-200 bg-white shadow-xl"
-        data-floatmenu-target="panel"
-        data-key="search"
-      >
-        <div class="p-4">
-          <form action="{{ routes.search_url }}" method="get" role="search" class="flex gap-2">
-            <input
-              type="hidden"
-              name="options[prefix]"
-              value="last"
-            >
-            <input
-              type="search"
-              name="q"
-              placeholder="Type here…"
-              aria-label="Search products"
-              class="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/10"
-            >
-            <button
-              type="submit"
-              class="rounded-md border border-neutral-900 px-4 py-2 text-sm font-medium hover:bg-neutral-900 hover:text-white"
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <!-- Dynamic content gets swapped here -->
+    <div data-floatmenu-target="content" class="p-4 text-sm text-gray-700"></div>
   </div>
 </div>
 
