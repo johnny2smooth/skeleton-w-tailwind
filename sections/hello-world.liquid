@@ -1,63 +1,10 @@
 {% assign my_collection = collections['all'] %}
+
 <div class="flex gap-1 md:gap-4 px-2 py-2">
   <div class="grow md:inset-shadow-sm md:rounded-xl">
     {% paginate my_collection.products by 14 %}
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:pt-4">
-        {% for product in my_collection.products %}
-          {% assign product_id = product.title | handleize %}
-          <div 
-          class="product-card collection-product md:px-2 md:pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
-            {% if product.featured_image %}
-              {% assign vt_handle = product.title | handleize %}
-              {% assign vt = "view-transition-name: photo-"| append: vt_handle %}
-              {% render 'image',
-                class: 'collection-product__image hover:shadow-md/20 hover:-translate-y-1 transition duration-200 ease-in rounded-xl',
-                style:  vt,
-                image: product.featured_image,
-                url: product.url,
-                width: 1100
-              %}
-            {% endif %}
-            <div  style="view-transition-name: {{ product_id }}-card" class="collection-product__content md:p-4 rounded-xl" >
-              <a href={{product.url}}> 
-                <p class="text-sm" style="view-transition-name: {{product.title | handleize}}-{{product-vendor| handleize}}">{{product.vendor}}</p>
-                <p class="text-xs" style="view-transition-name: {{product.title | handleize}}">{{ product.title }}</p>
-                <div class="flex justify-between align-end items-center">
-                  <p class="text-xs" style="view-transition-name: {{product.title | handleize}}-price"class="font-mono">{{ product.price | money }}</p>
-                  <div 
-                    class="buy-now-square w-1 h-1 transition duration-500 rounded-sm bg-transparent"
-                    style="view-transition-name: {{product_id}}-buy-now-square">
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
+      {% render 'product-grid', products: my_collection.products %}
+      <div class="flex justify-center gap-4 pt-8">{{ paginate | default_pagination }}</div>
     {% endpaginate %}
   </div>
 </div>
-<style>
-  .product-card:hover .buy-now-square {
-    background-color: oklch(86.9% 0.022 252.894);
-  }
-</style>
-{% stylesheet %}
-  .collection-products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-  }
-  span.current {
-    color: oklch(93% 0.034 272.788);
-  }
-
-{% endstylesheet %}
-
-{% schema %}
-{
-  "name": "t:general.collection",
-  "settings": []
-}
-{% endschema %}

@@ -1,0 +1,29 @@
+{%- comment -%}
+  Generic product grid. Expects:
+   - products: array (either collection.products OR search.results)
+  Notes:
+   - If items are search results, we render only when object_type == 'product'.
+   - Pagination MUST be handled by the caller (template/section), not here.
+{%- endcomment -%}
+
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:pt-4">
+  {%- for item in products -%}
+    {%- comment -%} When passed search.results, filter only product items {%- endcomment -%}
+    {%- if item.object_type and item.object_type != 'product' -%}{% continue %}{%- endif -%}
+    {%- assign product = item -%}
+    {%- render 'product-card', product: product -%}
+  {%- endfor -%}
+</div>
+
+<style>
+  .product-card:hover .buy-now-square { background-color: oklch(86.9% 0.022 252.894); }
+</style>
+
+{% stylesheet %}
+  .collection-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  span.current { color: oklch(93% 0.034 272.788); }
+{% endstylesheet %}

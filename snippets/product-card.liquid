@@ -1,0 +1,26 @@
+{%- comment -%} Renders a single product tile. Expects: product {%- endcomment -%}
+{%- assign product_id = product.title | handleize -%}
+
+<div class="product-card collection-product md:px-2 pt-2 md:pt-2 hover:shadow-md/20 hover:-translate-y-1 transition duration-300 ease-in rounded-xl">
+  {%- if product.featured_image -%}
+    {%- assign vt_handle = product.title | handleize -%}
+    {%- assign vt = 'view-transition-name: photo-' | append: vt_handle -%}
+    {%- render 'image',
+      class: 'collection-product__image hover:shadow-md/20 hover:-translate-y-1 transition duration-200 ease-in rounded-xl',
+      style: vt,
+      image: product.featured_image,
+      url: product.url,
+      width: 1100
+    -%}
+  {%- endif -%}
+
+  <div style="view-transition-name: {{ product_id }}-card" class="collection-product__content pt-2 md:p-4 rounded-xl">
+    <a href="{{ product.url }}">
+      <p class="text-xs text-slate-600" style="view-transition-name: {{ product.title | handleize }}-{{ product.vendor | handleize }}">{{ product.vendor }}</p>
+      <p class="text-sm" style="view-transition-name: {{ product.title | handleize }}">{{ product.title }}</p>
+      <div class="flex justify-between align-end items-center">
+        <p class="text-xs content-end" style="view-transition-name: {{ product.title | handleize }}-price">{{ product.price | money }}</p>
+      </div>
+    </a>
+  </div>
+</div>
